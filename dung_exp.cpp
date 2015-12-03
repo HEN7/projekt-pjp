@@ -11,7 +11,7 @@ int main()
     int height = 600;
 
     bool done = false;
-    bool main_menu = true;
+    bool menu = true;
     bool game = false;
     bool opt = false;
     bool rec = false;
@@ -81,7 +81,7 @@ int main()
     event_queue = al_create_event_queue();
 
 //////////////////////////////////////////////////
-//               EVENTS                               //
+//               EVENTS                         //
 /////////////////////////////////////////////////
     al_register_event_source(event_queue, al_get_display_event_source(display));
     al_register_event_source(event_queue, al_get_mouse_event_source());
@@ -138,56 +138,56 @@ int main()
             case ALLEGRO_KEY_ENTER:
                 if(pos_point<=330)
                 {
-                    main_menu=!main_menu;
+                    menu=!menu;
                     game=!game;
                 }
                 else if(pos_point<=365)
                 {
-                    main_menu=!main_menu;
+                    menu=!menu;
                     rec=!rec;
                 }
                 else if(pos_point<=400)
                 {
-                    main_menu=!main_menu;
+                    menu=!menu;
                     opt=!opt;
                 }
                 break;
             }
         }
-        if(main_menu)
+        if(menu)
             {
             al_draw_textf(title,al_map_rgb(255,0,0),90,200,0,"DUNGEON EXPLORER");
-            al_draw_textf(font_ttf,al_map_rgb(150,180,250),320,350,0,"new game");
-            al_draw_textf(font_ttf,al_map_rgb(150,180,250),345,385,0,"records");
-            al_draw_textf(font_ttf,al_map_rgb(150,180,250),345,420,0,"options");
-            al_draw_text (esc,al_map_rgb(150,180,250),650,590,0,"press esc to exit");
+            al_draw_textf(font_ttf,al_map_rgb(255,0,0),320,350,0,"new game");
+            al_draw_textf(font_ttf,al_map_rgb(255,0,0),345,385,0,"records");
+            al_draw_textf(font_ttf,al_map_rgb(255,0,0),345,420,0,"options");
+            al_draw_text (esc,al_map_rgb(255,0,0),650,590,0,"press esc to exit");
             //al_draw_textf(font_ttf,al_map_rgb(150,180,250),375,455,0,"exit");
             al_draw_bitmap(pnt, 200, pos_point, 0);
             al_convert_mask_to_alpha(pnt, al_map_rgb(255,105,180));
             }
         if(game)
         {
-            al_draw_textf(font_ttf,al_map_rgb(150,180,250),0,50,0,"tu powinna byc gra");
+            al_draw_textf(font_ttf,al_map_rgb(255,0,0),240,50,0,"tu powinna byc gra");
         }
         if(opt)
         {
-            al_draw_textf(font_ttf,al_map_rgb(150,180,250),0,50,0,"options:");
-            al_draw_textf(font_ttf,al_map_rgb(150,180,250),0,100,0,"placeholder");
-            al_draw_textf(font_ttf,al_map_rgb(150,180,250),0,150,0,"placeholder");
-            al_draw_textf(font_ttf,al_map_rgb(150,180,250),0,200,0,"placeholder");
-            al_draw_textf(font_ttf,al_map_rgb(150,180,250),0,250,0,"placeholder");
-            al_draw_textf(font_ttf,al_map_rgb(150,180,250),0,300,0,"placeholder");
-            al_draw_textf(font_ttf,al_map_rgb(150,180,250),0,350,0,"placeholder");
+            al_draw_textf(font_ttf,al_map_rgb(255,0,0),320,50,0,"options:");
+            al_draw_textf(font_ttf,al_map_rgb(255,0,0),290,100,0,"placeholder");
+            al_draw_textf(font_ttf,al_map_rgb(255,0,0),290,150,0,"placeholder");
+            al_draw_textf(font_ttf,al_map_rgb(255,0,0),290,200,0,"placeholder");
+            al_draw_textf(font_ttf,al_map_rgb(255,0,0),290,250,0,"placeholder");
+            al_draw_textf(font_ttf,al_map_rgb(255,0,0),290,300,0,"placeholder");
+            al_draw_textf(font_ttf,al_map_rgb(255,0,0),290,350,0,"placeholder");
         }
         if(rec)
         {
-            al_draw_textf(font_ttf,al_map_rgb(150,180,250),0,50,0,"records:");
-            al_draw_textf(font_ttf,al_map_rgb(150,180,250),0,100,0,"placeholder");
-            al_draw_textf(font_ttf,al_map_rgb(150,180,250),0,150,0,"placeholder");
-            al_draw_textf(font_ttf,al_map_rgb(150,180,250),0,200,0,"placeholder");
-            al_draw_textf(font_ttf,al_map_rgb(150,180,250),0,250,0,"placeholder");
-            al_draw_textf(font_ttf,al_map_rgb(150,180,250),0,300,0,"placeholder");
-            al_draw_textf(font_ttf,al_map_rgb(150,180,250),0,350,0,"placeholder");
+            al_draw_textf(font_ttf,al_map_rgb(255,0,0),320,50,0,"records:");
+            al_draw_textf(font_ttf,al_map_rgb(255,0,0),290,100,0,"placeholder");
+            al_draw_textf(font_ttf,al_map_rgb(255,0,0),290,150,0,"placeholder");
+            al_draw_textf(font_ttf,al_map_rgb(255,0,0),290,200,0,"placeholder");
+            al_draw_textf(font_ttf,al_map_rgb(255,0,0),290,250,0,"placeholder");
+            al_draw_textf(font_ttf,al_map_rgb(255,0,0),290,300,0,"placeholder");
+            al_draw_textf(font_ttf,al_map_rgb(255,0,0),290,350,0,"placeholder");
         }
             al_flip_display();
             al_clear_to_color(al_map_rgb(0,0,0));
