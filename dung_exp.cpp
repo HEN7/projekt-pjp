@@ -1,5 +1,4 @@
 #include <allegro5/allegro.h>
-#include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_native_dialog.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_ttf.h>
@@ -15,6 +14,7 @@ int main()
     bool game = false;
     bool opt = false;
     bool rec = false;
+    bool k[4]={false,false,false,false};
 
 
     int pos_x = width / 2;
@@ -26,7 +26,6 @@ int main()
 
     al_init();
     al_init_image_addon();
-    al_init_primitives_addon();
     al_install_mouse();
     al_install_keyboard();
     al_init_font_addon();
@@ -36,48 +35,59 @@ int main()
     ALLEGRO_BITMAP *pnt = al_load_bitmap("lol.png");
     ALLEGRO_FONT *esc = al_create_builtin_font();
 
-    display= al_create_display(width, height);
+    ALLEGRO_BITMAP *ludek1 = al_load_bitmap("ludzik.bmp");
+    ALLEGRO_BITMAP *sciana1 = al_load_bitmap("sciana.bmp");
+    ALLEGRO_BITMAP *ziemia1 = al_load_bitmap("ziemia.bmp");
+    ALLEGRO_BITMAP *sciana2 = al_load_bitmap("sciana1.bmp");
+    ALLEGRO_BITMAP *sciana3 = al_load_bitmap("sciana2.bmp");
+    ALLEGRO_BITMAP *kamien1 = al_load_bitmap("kamien.bmp");
+
+    display = al_create_display(width, height);
 
 ////////////////////////////////////
 //        ERROR MESSAGES          //
 ////////////////////////////////////
-        if(!pnt)
+       if(!pnt)
         {
-        al_show_native_message_box(display, "ERROR", NULL,
-        "Cannot load bitmap", NULL, ALLEGRO_MESSAGEBOX_ERROR);
-         return -1;
+            al_show_native_message_box(display, "ERROR", NULL,
+            "Cannot load bitmap", NULL, ALLEGRO_MESSAGEBOX_ERROR);
+            return -1;
         }
 
         if(!al_init())
         {
-            al_show_native_message_box(NULL, NULL, NULL, "Could not initialize Allegro 5", NULL, NULL);
+            al_show_native_message_box(display, "ERROR", NULL,
+            "Could not initialize Allegro 5", NULL, ALLEGRO_MESSAGEBOX_ERROR);
             return -1;
         }
 
         if(!display)
         {
-            al_show_native_message_box(NULL, NULL, NULL, "Could not create display", NULL, NULL);
+            al_show_native_message_box(display, "ERROR", NULL,
+            "Could not create display", NULL, ALLEGRO_MESSAGEBOX_ERROR);
             return -1;
         }
 
         if(!al_install_keyboard())
         {
-            al_show_native_message_box(NULL, NULL, NULL, "Could not install keyboard", NULL, NULL);
+            al_show_native_message_box(display, "ERROR", NULL,
+            "Could not install keyboard", NULL, ALLEGRO_MESSAGEBOX_ERROR);
             return -1;
         }
 
         if(!al_install_mouse())
         {
-            al_show_native_message_box(NULL, NULL, NULL, "Could not install mouse", NULL, NULL);
+            al_show_native_message_box(display, "ERROR", NULL,
+            "Could not install mouse", NULL, ALLEGRO_MESSAGEBOX_ERROR);
             return -1;
         }
 
         if(!al_init_ttf_addon())
         {
-            al_show_native_message_box(NULL, NULL, NULL, "Could not load ttf font", NULL, NULL);
+            al_show_native_message_box(display, "ERROR", NULL,
+            "Could not load ttf font", NULL, ALLEGRO_MESSAGEBOX_ERROR);
             return -1;
         }
-
     event_queue = al_create_event_queue();
 
 //////////////////////////////////////////////////
@@ -96,6 +106,54 @@ int main()
         {
             done = true;
         }
+        else if(ev.type == ALLEGRO_EVENT_KEY_DOWN)
+        {
+              switch(ev.keyboard.keycode)
+                    {
+                    case ALLEGRO_KEY_UP:
+                        //pos_y -= 15;
+                        k[0]=true;
+                        break;
+                    case ALLEGRO_KEY_DOWN:
+                        //pos_y += 15;
+                        k[1]=true;
+                        break;
+                    case ALLEGRO_KEY_LEFT:
+                        //pos_x -= 15;
+                        k[2]=true;
+                        break;
+                    case ALLEGRO_KEY_RIGHT:
+                        //pos_x += 15;
+                        k[3]=true;
+                        break;
+                    }
+        }
+        if(ev.type == ALLEGRO_EVENT_KEY_UP)
+        {
+              switch(ev.keyboard.keycode)
+                    {
+                    case ALLEGRO_KEY_UP:
+                        //pos_y -= 15;
+                        k[0]=false;
+                        break;
+                    case ALLEGRO_KEY_DOWN:
+                        //pos_y += 15;
+                        k[1]=false;
+                        break;
+                    case ALLEGRO_KEY_LEFT:
+                        //pos_x -= 15;
+                        k[2]=false;
+                        break;
+                    case ALLEGRO_KEY_RIGHT:
+                        //pos_x += 15;
+                        k[3]=false;
+                        break;
+                    }
+        }
+        if(k[0]) pos_y -= 5;
+        if(k[1]) pos_y += 5;
+        if(k[2]) pos_x -= 5;
+        if(k[3]) pos_x += 5;
        /* else if(ev.type == ALLEGRO_EVENT_MOUSE_AXES)          //mouse event
         {
             pos_x = ev.mouse.x;
@@ -110,9 +168,12 @@ int main()
          {
             switch (ev.keyboard.keycode)
             {
-            case  ALLEGRO_KEY_ESCAPE:           //closing program with escape button
-                done = true;
-                break;
+            case  ALLEGRO_KEY_ESCAPE:  //closing program with escape button
+                    if(menu = true)
+                        done = true;
+                    if(menu = false)
+                        done = false;
+                    break;
             case ALLEGRO_KEY_DOWN:              //moving down in main menu
                 pos_point +=35;
                 if (pos_point <= 330)
@@ -154,6 +215,8 @@ int main()
                 break;
             }
         }
+
+
         if(menu)
             {
             al_draw_textf(title,al_map_rgb(255,0,0),90,200,0,"DUNGEON EXPLORER");
@@ -167,7 +230,10 @@ int main()
             }
         if(game)
         {
-            al_draw_textf(font_ttf,al_map_rgb(255,0,0),240,50,0,"tu powinna byc gra");
+            al_clear_to_color(al_map_rgb(0,0,0));
+            al_draw_bitmap(ludek1, pos_x, pos_y, 0);
+          //  al_draw_bitmap(sciana1,)
+            al_convert_mask_to_alpha(ludek1, al_map_rgb(255,255,255));
         }
         if(opt)
         {
@@ -198,5 +264,6 @@ int main()
     al_destroy_font(title);
     al_destroy_bitmap(pnt);
     al_destroy_font(esc);
+    al_destroy_bitmap(ludek1);
     return 0;
 }
