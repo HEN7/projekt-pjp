@@ -114,7 +114,7 @@ int main()
     ALLEGRO_FONT *font_ttf = al_load_ttf_font("OLDENGL.ttf",45,0);
     ALLEGRO_FONT *title = al_load_ttf_font("L.ttf",60,0);
     ALLEGRO_BITMAP *pnt = al_load_bitmap("lol.png");
-    //ALLEGRO_FONT *esc = al_create_builtin_font();
+    ALLEGRO_FONT *scor = al_create_builtin_font();
 
     ALLEGRO_BITMAP *ludek1 = al_load_bitmap("ludzik.bmp");
     ALLEGRO_BITMAP *portal = al_load_bitmap("portal.bmp");
@@ -329,8 +329,8 @@ int main()
                 al_draw_bitmap_region(teren, tileSize * map[i],0,tileSize,tileSize, xOff + tileSize *(i%mapCollumn),yOff +tileSize*(i/mapCollumn),0);
 
             }
-             al_draw_textf(font_ttf,al_map_rgb(255,0,0),10,20,0,"SCORE: %i", score);
-             al_draw_textf(font_ttf,al_map_rgb(255,0,0),450,20,0,"LIFE: %i", tmp_life);
+             al_draw_textf(scor,al_map_rgb(255,0,0),10,20,0,"SCORE: %i", score);
+             al_draw_textf(scor,al_map_rgb(255,0,0),450,20,0,"LIFE: %i", tmp_life);
 
             if(score < 50)
             {
@@ -396,7 +396,7 @@ int main()
 
 
 
-            if(pos_x>=50 && pos_x<=60&&pos_y>=50&&pos_y<=60)
+            if(pos_x>=50 && pos_x<=70&&pos_y>=50&&pos_y<=70)
             {
                 s=true;
                 game=false;
@@ -466,6 +466,7 @@ int main()
     al_destroy_display(display);
     al_destroy_font(font_ttf);
     al_destroy_font(title);
+    al_destroy_font(scor);
     al_destroy_bitmap(pnt);
     al_destroy_bitmap(ludek1);
     al_destroy_bitmap(portal);
