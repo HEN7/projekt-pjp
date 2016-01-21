@@ -15,7 +15,7 @@
 					<Add option="-g" />
 				</Compiler>
 				<Linker>
-					<Add library="..\..\allegro-5.0.10-mingw-4.7.0\lib\liballegro-5.0.10-monolith-mt-debug.a" />
+					<Add library="D:\Program Files (x86)\CodeBlocks\MinGW\allegro-5.0.10-mingw-4.7.0\lib\liballegro-5.0.10-monolith-mt-debug.a" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -28,14 +28,14 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add library="..\..\allegro-5.0.10-mingw-4.7.0\lib\liballegro_memfile-5.0.10-mt.a" />
+					<Add library="D:\Program Files (x86)\CodeBlocks\MinGW\allegro-5.0.10-mingw-4.7.0\lib\liballegro-5.0.10-monolith-md.a" />
 				</Linker>
 			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
-			<Add directory="../../allegro-5.0.10-mingw-4.7.0/include" />
+			<Add directory="D:/Program Files (x86)/CodeBlocks/MinGW/allegro-5.0.10-mingw-4.7.0/include" />
 		</Compiler>
 		<Unit filename="dung_exp.cpp" />
 		<Extensions>
