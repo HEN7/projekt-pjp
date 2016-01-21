@@ -117,7 +117,7 @@ int main()
     //ALLEGRO_FONT *esc = al_create_builtin_font();
 
     ALLEGRO_BITMAP *ludek1 = al_load_bitmap("ludzik.bmp");
-    //ALLEGRO_BITMAP *portal = al_load_bitmap("portal.bmp");
+    ALLEGRO_BITMAP *portal = al_load_bitmap("portal.bmp");
     ALLEGRO_BITMAP *teren = NULL;
 
     ALLEGRO_BITMAP *diam[iloscdiam];
@@ -263,22 +263,22 @@ int main()
                 pos_point +=35;
                 if (pos_point <= 330)
                 {
-                    pos_point = 400;
+                    pos_point = 410;
                 }
-                else if (pos_point > 400)
+                else if (pos_point > 410)
                 {
                     pos_point = 330;
                 }
                 break;
             case ALLEGRO_KEY_UP:                //moving up in main menu
                 pos_point-= 35;
-                if (pos_point >= 410)
+                if (pos_point >= 400)
                 {
                     pos_point = 320;
                 }
                 else if(pos_point <= 320)
                 {
-                    pos_point = 410;
+                    pos_point = 400;
                 }
                 break;
             case ALLEGRO_KEY_ENTER:
@@ -332,7 +332,8 @@ int main()
              al_draw_textf(font_ttf,al_map_rgb(255,0,0),10,20,0,"SCORE: %i", score);
              al_draw_textf(font_ttf,al_map_rgb(255,0,0),450,20,0,"LIFE: %i", tmp_life);
 
-            if(score < 50){
+            if(score < 50)
+            {
             for(int i =0; i<2; i++){
             al_draw_bitmap(diam[i],diam_x[i],diam_y[i],0);
             al_convert_mask_to_alpha(diam[i], al_map_rgb(255,255,255));
@@ -342,7 +343,8 @@ int main()
             }
             d = 2;
             }else
-            if(score < 100){
+            if(score < 100)
+            {
             for(int i =0; i<4; i++)
             {
             al_draw_bitmap(diam[i],diam_x[i],diam_y[i],0);
@@ -387,8 +389,20 @@ int main()
             }
             d = iloscdiam;
             }
+            al_draw_bitmap(portal, 50,60,0);
+            al_convert_mask_to_alpha(portal, al_map_rgb(255,255,255));
             al_draw_bitmap(ludek1, pos_x, pos_y, 0);
             al_convert_mask_to_alpha(ludek1, al_map_rgb(255,255,255));
+
+
+
+            if(pos_x>=50 && pos_x<=60&&pos_y>=50&&pos_y<=60)
+            {
+                s=true;
+                game=false;
+
+            }
+
 
             for(int i =0; i<d; i++){
                 if(pos_x > diam_x[i] && pos_x < diam_x[i]+diam_s_x && pos_y > diam_y[i] && pos_y < diam_y[i]+diam_s_y)
@@ -403,21 +417,13 @@ int main()
                     tmp_life-=1;
                     break;
                     }
-
             }
 
-            //if( r == 153 && g == 217 && b == 234 )
-           // {
-           //     al_show_native_message_box(display, "ERROR", NULL,"LOL", NULL, ALLEGRO_MESSAGEBOX_ERROR);
-           // }
-
-
-            if(tmp_life == 0){
-
+            if(tmp_life == 0)
+            {
             s = true;
             game = false;
             tmp_life = ilosc_zyc;
-
             }
         }
 
@@ -445,7 +451,8 @@ int main()
             al_draw_textf(font_ttf,al_map_rgb(255,0,0),290,350,0,"placeholder");
 
         }*/
-        if(s == true){
+        if(s == true)
+        {
             al_clear_to_color(al_map_rgb(0,0,0));
             al_draw_textf(font_ttf,al_map_rgb(255,0,0),300,300,0,"SCORE: %i", score);
         }
@@ -461,6 +468,7 @@ int main()
     al_destroy_font(title);
     al_destroy_bitmap(pnt);
     al_destroy_bitmap(ludek1);
+    al_destroy_bitmap(portal);
     for(int i=0; i<iloscdiam; i++)
     {
     al_destroy_bitmap(diam[i]);
